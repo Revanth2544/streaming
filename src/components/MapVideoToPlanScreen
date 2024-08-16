@@ -1,0 +1,47 @@
+// src/components/MapVideoToPlanScreen.js
+import React, { useState } from 'react';
+
+function MapVideoToPlanScreen({ onMappingVideoToPlan }) {
+  const [mappingData, setMappingData] = useState({
+    videoId: '',
+    planId: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setMappingData({ ...mappingData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onMappingVideoToPlan(mappingData);
+    setMappingData({ videoId: '', planId: '' });
+  };
+
+  return (
+    <div className="container">
+      <h2>Map Video to Plan</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="videoId"
+          placeholder="Video ID"
+          value={mappingData.videoId}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="planId"
+          placeholder="Plan ID"
+          value={mappingData.planId}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit">Map Video</button>
+      </form>
+    </div>
+  );
+}
+
+export default MapVideoToPlanScreen;
